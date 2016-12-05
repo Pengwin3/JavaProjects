@@ -95,7 +95,9 @@ public class Hole {
      */
     public boolean fits (Glass g, int xoffset, int yoffset)
     {
+        if (g.getWidth() < getWidth() && g.getHeight() < getHeight()) {
 
+        }
     }
 
     /**
