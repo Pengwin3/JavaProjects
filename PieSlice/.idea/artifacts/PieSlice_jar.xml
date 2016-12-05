@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PieSlice:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PieSlice_jar</output-path>
+    <root id="archive" name="PieSlice.jar">
+      <element id="module-output" name="PieSlice" />
+    </root>
+  </artifact>
+</component>

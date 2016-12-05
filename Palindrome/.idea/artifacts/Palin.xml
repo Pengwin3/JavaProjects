@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Palin">
+    <output-path>$PROJECT_DIR$/out/artifacts/Palin</output-path>
+    <root id="archive" name="Palin.jar">
+      <element id="module-output" name="Palindrome" />
+    </root>
+  </artifact>
+</component>

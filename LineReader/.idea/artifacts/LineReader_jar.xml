@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LineReader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LineReader_jar</output-path>
+    <root id="archive" name="LineReader.jar">
+      <element id="module-output" name="LineReader" />
+    </root>
+  </artifact>
+</component>
