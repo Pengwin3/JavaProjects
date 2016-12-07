@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
+import StainedGlass.Hole;
 
 
 public class Reconstructor {
@@ -86,8 +87,10 @@ public class Reconstructor {
 
 
     private void printSolution() {
-        if (solved)
-            System.out.print (window.toString());
+        if (solved) {
+            System.out.print(window.toString());
+            System.out.println(Arrays.toString(pieces));
+        }
         else
             System.out.println ("The window cannot be repaired.");
     }
@@ -105,6 +108,7 @@ public class Reconstructor {
             Glass p = pieces[pieceNum];
             // System.err.println ("Attempting to insert\n" + p);
             tryToInsert (p, pieceNum);
+            printSolution();
             if (!solved) {
                 Glass p2 = p.flip();
                 // System.err.println ("Attempting to insert flipped\n" + p2);
@@ -149,6 +153,7 @@ public class Reconstructor {
         int total = 0;
         for (int i = 0; i < pieces.length; ++i)
             total += pieces[i].area();
+        System.out.println("Total area of glass Pieces: " + total);
         if (total == window.area()) {
             // The areas match, so there's at least a possibility that the 
             // glass pieces can fill up the window. 

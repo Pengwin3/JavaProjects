@@ -1,7 +1,9 @@
 /**
  *
  */
+
 package StainedGlass;
+import StainedGlass.Glass;
 
 /**
  * A hole that can contain multiple pieces of stained glass
@@ -34,7 +36,6 @@ public class Hole {
         for (int i = 0; i < height; ++i) {
             for (int w = 0; w < text[i].length(); ++w) {
                 if (text[i].charAt(w) != ' ') {
-                    descriptor = text[i].charAt(w);
                     width = Math.max(width, w+1);
                     leftOffset = Math.min(leftOffset, w);
                 }
@@ -42,12 +43,12 @@ public class Hole {
         }
         width -= leftOffset;
 
-        chars = new char[height][width];
+        setChars(new char[height][width]);
         for (int h = 0; h < height; ++h) {
             for (int w = leftOffset; w < text[h].length(); ++w)
-                chars[h][w-leftOffset] = text[h].charAt(w);
+                getChars()[h][w-leftOffset] = text[h].charAt(w);
             for (int w = text[h].length() - leftOffset; w < width; ++w)
-                chars[h][w] = ' ';
+                getChars()[h][w] = ' ';
         }
     }
 
@@ -67,7 +68,7 @@ public class Hole {
             return ' ';
         if (x < 0 || x >= width)
             return ' ';
-        return chars[y][x];
+        return getChars()[y][x];
     }
 
 
@@ -96,7 +97,9 @@ public class Hole {
     public boolean fits (Glass g, int xoffset, int yoffset)
     {
         if (g.getWidth() < getWidth() && g.getHeight() < getHeight()) {
-
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -114,7 +117,7 @@ public class Hole {
      */
     public void insert (Glass g, int xoffset, int yoffset)
     {
-        // your code here
+
     }
 
     /**
@@ -136,9 +139,17 @@ public class Hole {
      *
      * @return true if all empty spaces have been filled with glass
      */
-    public boolean filled()
-    {
-        // your code here
+    public boolean filled() {
+        int emptySpaces = 0;
+        for (int h = 0; h < height; ++h)
+            for (int w = 0; w < width; ++w)
+                if (chars[h][w] == '%')
+                    ++emptySpaces;
+            if (emptySpaces >= 0) {
+                return false;
+            } else {
+                return true;
+            }
     }
 
     /**
@@ -150,18 +161,50 @@ public class Hole {
      */
     public int area()
     {
-        // your code here
+        int total = 0;
+        for (int h = 0; h < height; ++h)
+            for (int w = 0; w < width; ++w)
+                if (chars[h][w] != ' ')
+                    ++total;
+        System.out.println("Total area of hole: " + total);
+        return total;
     }
 
 
-    public String toString()
-    {
-        // your code here
+    public String toString() {
+        {
+            StringBuilder buf = new StringBuilder();
+            for (int h = 0; h < height; ++h) {
+                int w = width - 1;
+                while (w >= 0 && chars[h][w] == ' ')
+                    --w;
+                for (int x = 0; x <= w; ++x)
+                    buf.append(chars[h][x]);
+                buf.append('\n');
+            }
+            return buf.toString();
+        }
+    }
+////        String[] piece = new String[height];
+//        StringBuilder buf = new StringBuilder();
+//        for (int y = 0; y < height; ++y) {
+//            for (int x = width - 1; x >= 0; --x)
+//                buf.append(chars[x][y]);
+//        }
+//            return buf.toString();
+//    }
+
+
+//    public boolean equals (Object o)
+//    {
+//        // your code here
+//    }
+
+    public char[][] getChars() {
+        return chars;
     }
 
-    public boolean equals (Object o)
-    {
-        // your code here
+    public void setChars(char[][] chars) {
+        this.chars = chars;
     }
-
 }
